@@ -1,7 +1,10 @@
 {
   "name": "traffic-tracking-system",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "AI-powered Traffic Tracking System with vehicle detection and license plate recognition",
+  "author": "Thousif Ibrahim <thousif.ibrahim@example.com>",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",

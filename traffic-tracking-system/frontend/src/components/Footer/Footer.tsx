@@ -1,40 +1,68 @@
-import { FaGithub, FaHeart, FaEnvelope, FaFileContract } from 'react-icons/fa'
+import { Github, Mail, FileText, Heart } from 'lucide-react'
 
 const Footer = () => {
   return (
     <footer className="site-footer">
-      <div className="footer-left">
-        <a
-          href="https://github.com/techy4shri/Traffic-Tracking-System"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footer-icon"
-        >
-          <FaGithub size={32} />
-        </a>
-      </div>
+      <div className="footer-content">
+        <div className="footer-left">
+          <div className="footer-brand">
+            <h4>Signal Insight </h4>
+            <p>A Vehicle Detection System</p>
+          </div>
+        </div>
 
-      <div className="footer-center">
-        <p className="footer-name">Garima Shrivastava</p>
-        <p className="footer-tagline">Computer Vision & Deep Learning</p>
-      </div>
+        <div className="footer-center">
+          <div className="footer-links">
+            <a href="#features" className="footer-link">Features</a>
+            <a href="#about" className="footer-link">About</a>
+            <a href="#contact" className="footer-link">Contact</a>
+            <a href="#privacy" className="footer-link">Privacy</a>
+          </div>
+        </div>
 
-      <div className="footer-right">
-        <a href="mailto:sushri4tech@gmail.com" className="footer-icon">
-          <FaEnvelope />
-        </a>
-        <a href="https://github.com/techy4shri/Traffic-Tracking-System/blob/main/LICENSE" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           className="footer-icon">
-          <FaFileContract />
-        </a>
-        <a href="https://github.com/sponsors/techy4shri" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           className="footer-icon sponsor">
-          <FaHeart />
-        </a>
+        <div className="footer-right">
+          <div className="footer-social">
+            <a
+              href="https://github.com/smdspace-dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-icon"
+              title="GitHub Repository"
+            >
+              <Github size={20} />
+            </a>
+            <a 
+              href="mailto:ahilxdesings@gmail.com" 
+              className="footer-icon"
+              title="Contact Email"
+            >
+              <Mail size={20} />
+            </a>
+            <a 
+              href="https://github.com/smdspace-dev" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer-icon"
+              title="License"
+            >
+              <FileText size={20} />
+            </a>
+            <a 
+              href="https://github.com/smdspace-dev" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer-icon sponsor"
+              title="Sponsor"
+            >
+              <Heart size={20} />
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div className="footer-bottom">
+        <p>&copy; 2024 Smdspace-dev. All rights reserved.</p>
+        <p>Open source</p>
       </div>
     </footer>
   )
