@@ -7,8 +7,8 @@ import shutil, uuid
 from fastapi import UploadFile, HTTPException
 from config import DATA_DIR
 
-ALLOWED_IMAGE = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
-ALLOWED_VIDEO = {".mp4", ".mov", ".avi", ".mkv"}
+ALLOWED_IMAGE = {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".jfif", ".tiff", ".tif", ".gif"}
+ALLOWED_VIDEO = {".mp4", ".mov", ".avi", ".mkv", ".webm", ".flv", ".wmv"}
 
 def _ext_ok(path: Path, kind: Literal["image","video"]):
     ext = path.suffix.lower()

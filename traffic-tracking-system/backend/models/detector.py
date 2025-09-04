@@ -49,17 +49,32 @@ class VideoResult:
 
 class TrafficAnalyzer:
     def __init__(self):
-        self.vehicle_model = YOLO(YOLO_VEHICLE_WEIGHTS)
-        self.plate_model   = YOLO(YOLO_PLATE_WEIGHTS)
-        self.vehicle_names = self.vehicle_model.model.names
+        try:
+            self.vehicle_model = YOLO(YOLO_VEHICLE_WEIGHTS)
+            self.plate_model   = YOLO(YOLO_PLATE_WEIGHTS)
+            self.vehicle_names = self.vehicle_model.model.names
+            print(f"✅ Models loaded successfully on {DEVICE}")
+        except Exception as e:
+            print(f"❌ Error loading YOLO models: {e}")
+            raise Exception(f"Failed to load YOLO models: {e}")
 
         if OCR_BACKEND == "rapidocr":
-            self.ocr = RapidOCR()
+            try:
+                self.ocr = RapidOCR()
+                print("✅ RapidOCR loaded successfully")
+            except Exception as e:
+                print(f"❌ Error loading RapidOCR: {e}")
+                self.ocr = None
         else:
             self.ocr = None  # you can later plug PaddleOCR/EasyOCR here
 
         # tracking for videos
-        self.tracker = sv.ByteTrack()
+        try:
+            self.tracker = sv.ByteTrack()
+            print("✅ ByteTrack initialized")
+        except Exception as e:
+            print(f"❌ Error initializing tracker: {e}")
+            self.tracker = None
 
     # --- helpers ---
     def _run_yolo(self, model, image_bgr, conf) -> sv.Detections:
@@ -72,14 +87,28 @@ class TrafficAnalyzer:
     def _ocr_plate(self, plate_bgr) -> PlateRead | None:
         if self.ocr is None:
             return None
-        # RapidOCR returns (text, score) list; keep best
-        res, _ = self.ocr(plate_bgr)
-        if not res:
+        try:
+            # RapidOCR returns (text, score) list; keep best
+            res, _ = self.ocr(plate_bgr)
+            if not res:
+                return None
+            # Flatten + choose max score line
+            best = max(res, key=lambda r: r[1])
+            
+            # Handle both string and list cases for best[0]
+            text_data = best[0]
+            if isinstance(text_data, list):
+                # If it's a list, join the elements
+                text_raw = "".join(str(item) for item in text_data)
+            else:
+                # If it's a string, use it directly
+                text_raw = str(text_data)
+            
+            text = "".join(ch for ch in text_raw.upper() if ch.isalnum())
+            return PlateRead(text=text, score=float(best[1]), box=(0,0,plate_bgr.shape[1], plate_bgr.shape[0]))
+        except Exception as e:
+            print(f"OCR processing error: {e}")
             return None
-        # Flatten + choose max score line
-        best = max(res, key=lambda r: r[1])
-        text = "".join(ch for ch in best[0].upper() if ch.isalnum())
-        return PlateRead(text=text, score=float(best[1]), box=(0,0,plate_bgr.shape[1], plate_bgr.shape[0]))
 
     # --- public API ---
     def analyze_image(self, path: Path) -> ImageResult:

@@ -7,8 +7,8 @@ import torch
 import os
 
 # Define the base directory
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "static" / "uploads"
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR.parent / "static" / "uploads"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 #Inference

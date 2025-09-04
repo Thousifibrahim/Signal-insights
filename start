@@ -1,0 +1,4 @@
+c:/Users/thous/Downloads/git/cloned/Traffic-Tracking-System/.venv/Scripts/uvicorn.exe app:app --host 0.0.0.0 --port 5000 --reload
+
+
+Push-Location "c:/Users/thous/Downloads/git/cloned/Traffic-Tracking-System/traffic-tracking-system/backend"; c:/Users/thous/Downloads/git/cloned/Traffic-Tracking-System/.venv/Scripts/uvicorn.exe app:app --host 0.0.0.0 --port 5000 --reload
