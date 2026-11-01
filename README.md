@@ -1,5 +1,7 @@
 # Signal-insights
 
+![stack: TypeScript](https://img.shields.io/badge/stack-TypeScript-3178C6) ![stack: CSS](https://img.shields.io/badge/stack-CSS-1572B6) ![stack: Python](https://img.shields.io/badge/stack-Python-3776AB) ![stack: Shell](https://img.shields.io/badge/stack-Shell-555) ![license: MIT](https://img.shields.io/badge/license-MIT-2ea44f)
+
 Project ion Monitoring the vehicle count and Traffic - Updating the system to trigger the light's
 
 ## Overview
